@@ -5,7 +5,11 @@ import AudioFiles from "./components/AudioFiles";
 import Player from './components/Player'
 
 function App() {
-  const [songs, setSongs] = useState(audios)
+  const [songs, setSongs] = useState(audios);
+  const getSongData = (song) => {
+    console.log(song)
+
+  }
   
   return (
     <>
@@ -17,7 +21,11 @@ function App() {
         songs.map((song) => {
           return (
       
-            <AudioFiles song={song} />
+            <AudioFiles
+              song={song}
+              getSongData={getSongData}
+            
+            />
         )
       })}
     </div>
