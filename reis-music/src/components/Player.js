@@ -6,7 +6,9 @@ import {
     TbPlayerTrackPrev,
 } from "react-icons/tb";
 
-export default function Player() {
+export default function Player({
+    currentSong
+}) {
     const [isPlaying, setIsPlaying] = useState(false);
     const togglePlay = () => {
         setIsPlaying(!isPlaying);
@@ -14,8 +16,15 @@ export default function Player() {
     return (
         <div>
             <div className="player-card">
-                <h4 className="activeSong-name"> Song name</h4>
-                <h4 className="activeArtist-name"> Artist name</h4>
+                {currentSong ? (
+                    <div>
+                        <h3 className="activeSong-name">{currentSong.name}</h3>
+                        <h5 className="activeArtist-name">{currentSong.creator}</h5>
+                    </div>
+                ) : (
+                    ""
+                )}
+                
 
                 <div className="control-icons">
                     <TbPlayerTrackPrev

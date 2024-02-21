@@ -1,35 +1,35 @@
 import { useState } from 'react';
-import "./App.css";
-import { audios } from './audioData'
-import AudioFiles from "./components/AudioFiles";
-import Player from './components/Player'
-
+import './App.css';
+import { audios } from './audioData';
+import Player from './components/Player';
 function App() {
-  const [songs, setSongs] = useState(audios);
-  const getSongData = (song) => {
-    console.log(song)
+  const songs = audios;
+  const [currentIndex, setCurrentIndex] = useState(null);
+  const [currentSong, setCurrentSong] = useState(songs[0]);
 
+  const nextSong = () => {
+    if(currentIndex + 1 < audios.length){
+      setCurrentIndex(currentIndex + 1)
+      setCurrentSong(audios[currentIndex + 1])
+    }
   }
-  
+
+  const prevSong = () => {
+    if(currentIndex > 0){
+      setCurrentIndex(currentIndex - 1)
+      setCurrentSong(audios[currentIndex - 1])
+    }
+  }
+
   return (
-    <>
-      <div className='player-main'>
-        <Player />
-      </div>
-    <div className='app-main'>
-      {
-        songs.map((song) => {
-          return (
-      
-            <AudioFiles
-              song={song}
-              getSongData={getSongData}
-            
-            />
-        )
-      })}
+    <div className='player-main'>
+      <Player
+        currentSong={currentSong}
+        currentIndex={currentIndex}
+        nextSong={nextSong}
+        prevSong={prevSong}
+      />
     </div>
-    </>
   );
 }
 
